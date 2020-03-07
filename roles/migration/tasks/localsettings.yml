@@ -6,3 +6,6 @@
 - name: Output host ansible
   debug:
     msg: "Ansible host is {{ ansible_host }}"
+
+- name: script valide la base de données
+  command: php /appli/projects/mediawiki/httpd/wiki_devops/maintenance/update.php

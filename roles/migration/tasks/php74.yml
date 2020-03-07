@@ -9,6 +9,14 @@
      src: files/remi-release-7.rpm
      dest: /tmp_app/mediawiki/package.rpm
 
-- name: Install php74
-  command: yum --enablerepo=remi-php74 install php php-xml php-soap php-xmlrpc php-mbstring php-json php-gd php-mcrypt.x86_64 php-mysql.x86_64 php74-php-intl.x86_64 -y
+- name: Install rpm
+  command: rpm -Uvh /tmp_app/mediawiki/package.rpm
+
+- name: install the latest version of Apache from the testing repo
+  yum:
+    name: "{{ item }}"
+    enablerepo: remi-php74
+    state: present
+  loop:
+    - php
   notify: restart httpd
