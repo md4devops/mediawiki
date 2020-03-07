@@ -1,0 +1,4 @@
+- name: ping_machine_cible
+  ping:
+- include_tasks: directory.yml
+- include_tasks: fs.yml

@@ -1,0 +1,19 @@
+- name: Unarchive Mediawiki
+  unarchive:
+    src: files/input_groupeD.tar.gz
+    dest: /tmp_app/mediawiki
+
+- name: Check that the INPUT_GROUPED exists
+  stat:
+    path: /appli/mediawiki/LIVR/01.00.00/INPUT_GROUPED
+  register: stat_result
+
+- name: Move INPUT in LIVR
+  command: mv /tmp_app/mediawiki/INPUT_GROUPED /appli/mediawiki/LIVR/01.00.00/
+  when: stat_result.stat.exists == False
+
+- name: Unarchive wikidevops.tar
+  unarchive:
+    src: /appli/mediawiki/LIVR/01.00.00/INPUT_GROUPED/Package_1/wiki_devops.tar.gz
+    dest: /appli/projects/mediawiki/httpd
+    remote_src: yes

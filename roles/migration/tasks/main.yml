@@ -1,0 +1,6 @@
+- include_tasks: sauvegarde.yml
+- include_tasks: php74.yml
+- include_tasks: unarchives110.yml
+- include_tasks: localsettings.yml
+- include_tasks: logotheme.yml
+- include_tasks: signature.yml

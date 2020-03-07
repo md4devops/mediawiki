@@ -1,0 +1,24 @@
+- name: creer dossier signature
+  file:
+    path: /etc/conf_centos/
+    state: directory
+
+- name: signature mediawiki 01.00.00
+  file:
+    path: /etc/conf_centos/md4_mediawiki.01.00.00_centos_7
+    state: touch
+
+- name: signature php5.4
+  file:
+    path: /etc/conf_centos/md4_php5.4_centos_7
+    state: touch
+
+- name: signature httpd
+  file:
+    path: /etc/conf_centos/md4_httpd.2.4.6_centos_7
+    state: touch
+
+- name: signature mariadb
+  file:
+    path: /etc/conf_centos/md4_mariadb.5.5_centos_7
+    state: touch

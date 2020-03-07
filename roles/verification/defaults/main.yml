@@ -1,0 +1,5 @@
+mysql_user: "mediawiki_user"
+mysql_password: "password"
+mysql_dbname: "mediawiki_db"
+db_host: "localhost"
+webserver_host: "localhost"

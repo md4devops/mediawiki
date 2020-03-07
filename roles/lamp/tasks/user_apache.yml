@@ -1,0 +1,8 @@
+- name: modifier gif user apache
+  command: groupmod -g 1110 apache
+- name: modifier uid
+  command: usermod -u 1111 apache
+- name: Start service httpd, if not started
+  service:
+    name: httpd
+    state: started

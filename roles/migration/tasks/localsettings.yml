@@ -1,0 +1,16 @@
+- name: copier localsettings.php
+  template:
+    src: templates/LocalSettings0.php.j2
+    dest: /appli/projects/mediawiki/httpd/wiki_devops/LocalSettings.php
+
+- name: Output host ansible
+  debug:
+    msg: "Ansible host is {{ ansible_host }}"
+
+- name: Update LocalSettings
+  command: php /appli/projects/mediawiki/httpd/wiki_devops/maintenance/update.php
+
+- name: copier localsettings.php
+  template:
+    src: templates/LocalSettings.php.j2
+    dest: /appli/projects/mediawiki/httpd/wiki_devops/LocalSettings.php

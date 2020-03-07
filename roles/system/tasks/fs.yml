@@ -1,0 +1,89 @@
+- name: Create a logical volume log
+  lvol:
+    vg: centos
+    lv: log
+    size: 1024
+
+- name: Formater log en xfs
+  filesystem:
+    fstype: xfs
+    dev: /dev/centos/log
+
+- name: Mount log
+  mount:
+    path: /var/projects/mediawiki
+    src: /dev/mapper/centos-log
+    fstype: xfs
+    state: mounted
+
+- name: Create a logical volume appli
+  lvol:
+    vg: centos
+    lv: appli
+    size: 2048
+
+- name: Formater appli en xfs
+  filesystem:
+    fstype: xfs
+    dev: /dev/centos/appli
+
+- name: Mount appli
+  mount:
+    path: /appli/mediawiki
+    src: /dev/mapper/centos-appli
+    fstype: xfs
+    state: mounted
+
+- name: Create a logical volume tmp
+  lvol:
+    vg: centos
+    lv: tmp
+    size: 2048
+
+- name: Formater tmp en xfs
+  filesystem:
+    fstype: xfs
+    dev: /dev/centos/tmp
+
+- name: Mount tmp
+  mount:
+    path: /tmp_app/mediawiki/
+    src: /dev/mapper/centos-tmp
+    fstype: xfs
+    state: mounted
+
+- name: Create a logical volume data
+  lvol:
+    vg: centos
+    lv: data
+    size: 2048
+
+- name: Formater data en xfs
+  filesystem:
+    fstype: xfs
+    dev: /dev/centos/data
+
+- name: Mount data
+  mount:
+    path: /home/mediawiki/data
+    src: /dev/mapper/centos-data
+    fstype: xfs
+    state: mounted
+
+- name: Create a logical volume projects
+  lvol:
+    vg: centos
+    lv: projects
+    size: 2048
+
+- name: Formater projects en xfs
+  filesystem:
+    fstype: xfs
+    dev: /dev/centos/projects
+
+- name: Mount projects
+  mount:
+    path: /appli/projects/mediawiki
+    src: /dev/mapper/centos-projects
+    fstype: xfs
+    state: mounted
