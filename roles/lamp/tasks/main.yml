@@ -1,0 +1,5 @@
+- include_tasks: setenforce.yml
+- include_tasks: apache.yml
+#- include_tasks: user_apache.yml
+- include_tasks: mariadb.yml
+- include_tasks: firewall.yml

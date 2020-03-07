@@ -1,0 +1,28 @@
+<VirtualHost *:80>
+        ServerAdmin MonMail@gmail.com
+        ServerName      www.mediawiki.lan
+        ServerAlias     mediawiki.lan
+        ServerAlias     *.mediawiki.lan
+
+        DocumentRoot /appli/projects/mediawiki/httpd/wiki_devops
+                DirectoryIndex  index.php
+        <Directory />
+                Options FollowSymLinks
+                AllowOverride None
+        </Directory>
+
+        <Directory /appli/projects/mediawiki/httpd/wiki_devops>
+                Options Indexes FollowSymLinks MultiViews
+                AllowOverride None
+                Require all granted
+        </Directory>
+
+        ErrorLog /var/projects/mediawiki/httpd/error_log
+
+        # Possible values include: debug, info, notice, warn, error, crit,
+        # alert, emerg.
+        LogLevel warn
+
+        CustomLog /var/projects/mediawiki/httpd/access_log combined
+
+</VirtualHost>

@@ -1,0 +1,26 @@
+- name: Creer repertoire pour le depot de mediawiki01.01.00
+  file:
+    path: /appli/mediawiki/LIVR/01.01.00
+    state: directory
+
+- name: Unarchive Mediawiki 01.01.00
+  unarchive:
+    src: files/INPUT_GROUPED_01.01.00.tar.gz
+    dest: /appli/mediawiki/LIVR/01.01.00
+
+- name: Unarchive wiki_devops_v010100
+  unarchive:
+    src: /appli/mediawiki/LIVR/01.01.00/INPUT_GROUPED/Package_2/wiki_devops_V01.01.00.tar.gz
+    dest: /appli/mediawiki/LIVR/01.01.00/INPUT_GROUPED/Package_2/
+    remote_src: yes
+
+- name: Supprimer répertoire
+  file:
+    path: /appli/projects/mediawiki/httpd/wiki_devops
+    state: absent
+
+- name: copier nouveau dossier vers instance
+  copy:
+    src: /appli/mediawiki/LIVR/01.01.00/INPUT_GROUPED/Package_2/wiki_devops_v2/
+    dest: /appli/projects/mediawiki/httpd/wiki_devops
+    remote_src: yes

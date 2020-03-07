@@ -1,0 +1,20 @@
+- name: Create mediawiki.conf
+  template:
+    src: templates/httpd/mediawiki.conf.j2
+    dest: /etc/httpd/conf.d/mediawiki.conf
+  notify: restart httpd
+
+- name: Check that the welcome.conf exists
+  stat:
+    path: /etc/httpd/conf.d/welcome.conf
+  register: stat_result
+
+- name: Rename welcome.conf
+  command: mv /etc/httpd/conf.d/welcome.conf /etc/httpd/conf.d/welcome.conf.old
+  when: stat_result.stat.exists == True
+
+- name: Create mediawiki.conf
+  template:
+    src: templates/mariadb/my.cnf.j2
+    dest: /etc/my.cnf
+  notify: restart mariadb

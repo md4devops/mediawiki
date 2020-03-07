@@ -1,0 +1,24 @@
+- name: Create directory mediawiki
+  file:
+    path: /appli/mediawiki/
+    state: directory
+
+- name: Create data directory mediawiki
+  file:
+    path: /home/mediawiki/data
+    state: directory
+
+- name: Create tmp directory
+  file:
+    path: /tmp_app/mediawiki
+    state: directory
+
+- name: Create log directory
+  file:
+    path: /var/projects/mediawiki/
+    state: directory
+
+- name: Create appli directory
+  file:
+    path: /appli/projects/mediawiki/
+    state: directory

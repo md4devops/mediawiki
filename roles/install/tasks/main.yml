@@ -1,0 +1,8 @@
+- name: Check that the LocalSettings exists
+  stat:
+    path: /appli/projects/mediawiki/httpd/wiki_devops/LocalSettings.php
+  register: stat_result
+
+- name: commande install.php
+  command: php /appli/projects/mediawiki/httpd/wiki_devops/maintenance/install.php --dbname=mediawiki_db --dbpass=password --dbport=3306 --dbserver=localhost --dbtype=mysql --dbuser=mediawiki_user --scriptpath= --confpath=/appli/projects/mediawiki/httpd/wiki_devops --lang=fr --pass=password wiki_devops admin
+  when: stat_result.stat.exists == False

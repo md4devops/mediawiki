@@ -1,0 +1,61 @@
+- name: Generate new root password
+  command: openssl rand -hex 7
+  args:
+    creates: /root/.my.cnf
+  register: mysql_new_root_pass
+  notify: restart mariadb
+
+- name: Remove anonymous users
+  mysql_user:
+    name: ""
+    state: absent
+  when: mysql_new_root_pass.changed
+
+- name: Remove test database
+  mysql_db:
+    name: test
+    state: absent
+  when: mysql_new_root_pass.changed
+
+- name: Output new root password
+  debug:
+    msg: "New root password is {{mysql_new_root_pass.stdout}}"
+  when: mysql_new_root_pass.changed
+
+- name: Update root password 1
+  mysql_user:
+    name: root
+    host: "{{ ansible_hostname }}"
+    password: "{{ mysql_new_root_pass.stdout }}"
+    check_implicit_admin: yes
+  when: mysql_new_root_pass.changed
+
+- name: Create my.cnf
+  template:
+    src: templates/mariadb/.my.cnf.j2
+    dest: /root/.my.cnf
+  when: mysql_new_root_pass.changed
+
+- name: Update root password 2
+  mysql_user:
+    name: root
+    host: "{{ item }}"
+    password: "{{ mysql_new_root_pass.stdout }}"
+    check_implicit_admin: yes
+  loop:
+    - 127.0.0.1
+    - ::1
+    - localhost
+  when: mysql_new_root_pass.changed
+
+- name: Create a new database
+  mysql_db:
+    name: mediawiki_db
+    state: present
+
+- name: Create MySQL user
+  mysql_user:
+    name: mediawiki_user
+    host: localhost
+    password: password
+    priv: mediawiki_db.*:ALL

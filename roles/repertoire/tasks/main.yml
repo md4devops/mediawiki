@@ -1,0 +1,40 @@
+- name: Creer repertoire de la base de donnees
+  file:
+    path: /appli/projects/mediawiki/mariadb
+    state: directory
+
+- name: Creer repertoire du serveur web
+  file:
+    path: /appli/projects/mediawiki/httpd
+    state: directory
+
+- name: Creer les repertoires de logs de la base de donnees
+  file:
+    path: /var/projects/mediawiki/mariadb
+    state: directory
+
+- name: Creer les repertoires de logs du serveur web
+  file:
+    path: /var/projects/mediawiki/httpd
+    state: directory
+
+- name: Creer dossier du livrable
+  file:
+    path: /appli/mediawiki/LIVR/01.00.00
+    state: directory
+
+- name: Creer dossier du livrable
+  file:
+    path: /appli/mediawiki/LIVR/01.00.00
+    state: directory
+- name: Creer le repertoire de logs de mariadb
+  file:
+    path: /var/projects/mediawiki/mariadb
+    state: directory
+- name: Creer le fichier de logs de mariadb
+  file:
+    path: /var/projects/mediawiki/mariadb/mariadb.log
+    state: touch
+    owner: root
+    group: mysql
+    mode: '0664'
