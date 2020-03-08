@@ -12,6 +12,7 @@
       - php-intl
       - php-mbstring
       - firewalld
+  ignore_errors: true
       
 - name: enable service httpd and ensure it is not masked
   systemd:

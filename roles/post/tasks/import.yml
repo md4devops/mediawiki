@@ -1,5 +1,6 @@
-- name: importe base de données
+- name: import base de données
   command: php /appli/projects/mediawiki/httpd/wiki_devops/maintenance/importDump.php /appli/mediawiki/LIVR/01.00.00/INPUT_GROUPED/Package_1/Donnees.xml
+  ignore_errors: true
 
 - name: script valide la base de données
   command: php /appli/projects/mediawiki/httpd/wiki_devops/maintenance/rebuildrecentchanges.php
@@ -9,6 +10,6 @@
     src: /appli/mediawiki/LIVR/01.00.00/INPUT_GROUPED/Package_1/dump_image.tar.gz
     dest: /tmp_app/mediawiki
     remote_src: yes
-    
+
 - name: importer les images dans la base de donnees
   command: php /appli/projects/mediawiki/httpd/wiki_devops/maintenance/importImages.php /appli/mediawiki/LIVR/01.00.00/INPUT_GROUPED/Package_1/images

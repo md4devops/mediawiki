@@ -1,4 +1,4 @@
-md4serv ansible_host=192.168.56.107 ansible_user=devops
+md4serv ansible_host=192.168.56.108 ansible_user=devops
 
 [mediawiki]
 md4serv

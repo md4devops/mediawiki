@@ -11,12 +11,23 @@
 
 - name: Install rpm
   command: rpm -Uvh /tmp_app/mediawiki/package.rpm
+  ignore_errors: true
 
-- name: install the latest version of Apache from the testing repo
+- name: install repo
   yum:
     name: "{{ item }}"
     enablerepo: remi-php74
     state: present
   loop:
     - php
+    - php-xml
+    - php-soap
+    - php-xmlrpc
+    - php-mbstring
+    - php-json
+    - php-gd
+    - php-mcrypt
+    - php-mysql
+    - php74-php-intl
+  ignore_errors: true
   notify: restart httpd
