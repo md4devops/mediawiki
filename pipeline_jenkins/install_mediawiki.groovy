@@ -5,21 +5,6 @@ pipeline {
 options {
 ansiColor("xterm")
 }
-
-stages {
-
-stage ('Clonage repo GIT') {
-steps {
-checkout([
-          $class: 'GitSCM',
-          branches: [[name: '*/develop']],
-          doGenerateSubmoduleConfigurations: false,
-          extensions: [],
-          submoduleCfg: [],
-          userRemoteConfigs: [[credentialsId: '03e6f26f-e1ff-45b3-8d96-c2f6e7200618', url: 'https://github.com/md4devops/mediawiki.git']]
-        ])
-}
-    }
     stage ('Install serveur LAMP') {
       when {
         expression { params.version != "migration" }
