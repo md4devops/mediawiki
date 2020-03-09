@@ -55,5 +55,21 @@ stages {
         )
       }
     }
+    stage ('Retour version 01.00.00') {
+      when {
+        expression { params.version == "retour v1" }
+      }
+      environment {
+        ANSIBLE_FORCE_COLOR = true
+      }
+      steps {
+        ansiblePlaybook (
+          colorized: true,
+          playbook: 'install_retour.yml',
+          inventory: 'inventories/alex/hosts',
+          extras: '${verbose}'
+        )
+      }
+    }
   }
 }
