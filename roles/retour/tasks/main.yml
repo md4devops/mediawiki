@@ -3,6 +3,11 @@
     path: /appli/mediawiki/01.01.00_sauvegarde/wiki_devops/sql
     state: directory
 
+- name: Creer le fichier de sauvegarde
+  file:
+    path: /appli/mediawiki/01.01.00_sauvegarde/sql/mediawiki.sql
+    state: touch
+
 - name: exporter la base de donnees
   mysql_db:
     state: dump
