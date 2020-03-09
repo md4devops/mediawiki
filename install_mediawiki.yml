@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 - import_playbook: lamp.yml
 - import_playbook: verification.yml
 - import_playbook: system.yml
@@ -6,3 +7,13 @@
 - import_playbook: install.yml
 - import_playbook: post.yml
 - import_playbook: migration.yml
+=======
+- import_playbook: lamp.yml
+- import_playbook: verification.yml
+- import_playbook: system.yml
+- import_playbook: repertoire.yml
+- import_playbook: deploy.yml
+- import_playbook: install.yml
+- import_playbook: post.yml
+- import_playbook: migration.yml
+>>>>>>> 443303a39d07389fa9b6a25e12195bfe37bbfd03

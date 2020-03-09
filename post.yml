@@ -1,5 +1,13 @@
+<<<<<<< HEAD
 - hosts: mediawiki
   become: yes
   roles:
     - common
     - post
+=======
+- hosts: mediawiki
+  become: yes
+  roles:
+    - common
+    - post
+>>>>>>> 443303a39d07389fa9b6a25e12195bfe37bbfd03
