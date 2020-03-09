@@ -12,7 +12,7 @@ stage ('Clonage repo GIT') {
 steps {
 checkout([
           $class: 'GitSCM',
-          branches: [[name: '*/master']],
+          branches: [[name: '*/develop']],
           doGenerateSubmoduleConfigurations: false,
           extensions: [],
           submoduleCfg: [],
@@ -21,6 +21,9 @@ checkout([
 }
     }
     stage ('Install serveur LAMP') {
+      when {
+        expression { params.version != "migration" }
+      }
       environment {
         ANSIBLE_FORCE_COLOR = true
       }
@@ -28,7 +31,7 @@ checkout([
         ansiblePlaybook (
           colorized: true,
           playbook: 'install_lamp.yml',
-          inventory: 'inventories/hosts',
+          inventory: 'inventories/alex/hosts',
           extras: '${VERBOSE}'
         )
       }
@@ -37,28 +40,32 @@ checkout([
       environment {
         ANSIBLE_FORCE_COLOR = true
       }
+      when {
+        expression { params.version != "migration" }
+      }
       steps {
         ansiblePlaybook (
           colorized: true,
           playbook: 'install_deploy.yml',
-          inventory: 'inventories/hosts',
+          inventory: 'inventories/alex/hosts',
           extras: '${VERBOSE}'
         )
       }
     }
-    if ( ${version} == "01.01.00") {
-      stage ('Migration 01.01.00') {
-        environment {
-          ANSIBLE_FORCE_COLOR = true
-        }
-        steps {
-          ansiblePlaybook (
-            colorized: true,
-            playbook: 'install_migration.yml',
-            inventory: 'inventories/hosts',
-            extras: '${VERBOSE}'
-          )
-        }
+    stage ('Migration 01.01.00') {
+      when {
+        expression { params.version == "01.01.00" | params.version == 'migration' }
+      }
+      environment {
+        ANSIBLE_FORCE_COLOR = true
+      }
+      steps {
+        ansiblePlaybook (
+          colorized: true,
+          playbook: 'install_migration.yml',
+          inventory: 'inventories/alex/hosts',
+          extras: '${VERBOSE}'
+        )
       }
     }
   }
