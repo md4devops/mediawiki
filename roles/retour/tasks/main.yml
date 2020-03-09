@@ -26,6 +26,11 @@
     remote_src: yes
   when: existe.stat.exists == True
 
+- name: Delete directory wiki_devops
+  file:
+    path: /appli/projects/mediawiki/httpd/wiki_devops/
+    state: absent
+
 - name: Delete bdd mediawiki_db
   mysql_db:
     name: mediawiki_db
@@ -38,4 +43,4 @@
     target: /appli/mediawiki/01.00.00_sauvegarde/sql/mediawiki.sql
 
 - name: Copy directory
-  command: cp -r /appli/mediawiki/01.00.00_sauvegarde/wiki_devops /appli/projects/httpd/
+  command: cp -r /appli/mediawiki/01.00.00_sauvegarde/wiki_devops /appli/projects/mediawiki/httpd/
