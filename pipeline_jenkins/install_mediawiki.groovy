@@ -9,7 +9,7 @@ ansiColor("xterm")
 stages {
     stage ('Install serveur LAMP') {
       when {
-        expression { params.version != "migration" | params.version != "retour v1" }
+        expression { params.version != "migration" && params.version != "retour v1" }
       }
       environment {
         ANSIBLE_FORCE_COLOR = true
@@ -28,7 +28,7 @@ stages {
         ANSIBLE_FORCE_COLOR = true
       }
       when {
-        expression { params.version != "migration" | params.version != "retour v1" }
+        expression { params.version != "migration" && params.version != "retour v1" }
       }
       steps {
         ansiblePlaybook (
@@ -41,7 +41,7 @@ stages {
     }
     stage ('Migration 01.01.00') {
       when {
-        expression { params.version == "01.01.00" | params.version == 'migration' }
+        expression { params.version == "01.01.00" || params.version == 'migration' }
       }
       environment {
         ANSIBLE_FORCE_COLOR = true
