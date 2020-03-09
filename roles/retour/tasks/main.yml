@@ -1,6 +1,6 @@
 - name: Creer repertoire du serveur web
   file:
-    path: /appli/mediawiki/01.01.00_sauvegarde/wiki_devops/sql
+    path: /appli/mediawiki/01.01.00_sauvegarde/sql
     state: directory
 
 - name: Creer le fichier de sauvegarde
