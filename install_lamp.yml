@@ -1,0 +1,3 @@
+- import_playbook: lamp.yml
+- import_playbook: verification.yml
+- import_playbook: system.yml

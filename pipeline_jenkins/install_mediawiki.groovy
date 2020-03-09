@@ -20,18 +20,45 @@ checkout([
         ])
 }
     }
-
-    stage ('Invoke Ansible Playbook install_mediawiki.yml') {
+    stage ('Install serveur LAMP') {
       environment {
         ANSIBLE_FORCE_COLOR = true
       }
       steps {
         ansiblePlaybook (
           colorized: true,
-          playbook: 'install_mediawiki.yml',
+          playbook: 'install_lamp.yml',
           inventory: 'inventories/hosts',
           extras: '${VERBOSE}'
         )
+      }
+    }
+    stage ('Deploy appli') {
+      environment {
+        ANSIBLE_FORCE_COLOR = true
+      }
+      steps {
+        ansiblePlaybook (
+          colorized: true,
+          playbook: 'install_deploy.yml',
+          inventory: 'inventories/hosts',
+          extras: '${VERBOSE}'
+        )
+      }
+    }
+    if ( ${version} == "01.01.00") {
+      stage ('Migration 01.01.00') {
+        environment {
+          ANSIBLE_FORCE_COLOR = true
+        }
+        steps {
+          ansiblePlaybook (
+            colorized: true,
+            playbook: 'install_migration.yml',
+            inventory: 'inventories/hosts',
+            extras: '${VERBOSE}'
+          )
+        }
       }
     }
   }
