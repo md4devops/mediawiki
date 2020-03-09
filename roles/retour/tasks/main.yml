@@ -1,10 +1,5 @@
 - name: Creer repertoire du serveur web
   file:
-    path: /appli/mediawiki/01.01.00_sauvegarde/sql
-    state: directory
-
-- name: Creer repertoire du serveur web
-  file:
     path: /appli/mediawiki/01.01.00_sauvegarde/wiki_devops
     state: directory
 
@@ -13,18 +8,6 @@
     state: dump
     name: mediawiki_db
     target: /appli/mediawiki/01.01.00_sauvegarde/sql/mediawiki.sql
-
-- name: Check that wiki devops existe
-  stat:
-    path: /appli/projects/mediawiki/httpd/wiki_devops/
-  register: existe
-
-- name: copier repertoire de version 01.01.00
-  copy:
-    src: /appli/projects/mediawiki/httpd/wiki_devops/
-    dest: /appli/mediawiki/01.01.00_sauvegarde/wiki_devops
-    remote_src: yes
-  when: existe.stat.exists == True
 
 - name: Delete directory wiki_devops
   file:
@@ -42,5 +25,5 @@
     name: mediawiki_db
     target: /appli/mediawiki/01.00.00_sauvegarde/sql/mediawiki.sql
 
-#- name: Copy directory
-#  command: cp -r /appli/mediawiki/01.00.00_sauvegarde/wiki_devops /appli/projects/mediawiki/httpd/
+- name: Copy directory
+  command: cp -r /appli/mediawiki/01.00.00_sauvegarde/wiki_devops /appli/projects/mediawiki/httpd/
