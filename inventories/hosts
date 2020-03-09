@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 md4serv ansible_host=192.168.223.8 ansible_user=devops
-=======
-md4serv ansible_host=192.168.56.108 ansible_user=devops
->>>>>>> 443303a39d07389fa9b6a25e12195bfe37bbfd03
 
 [mediawiki]
 md4serv
