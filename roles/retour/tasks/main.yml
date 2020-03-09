@@ -42,5 +42,5 @@
     name: mediawiki_db
     target: /appli/mediawiki/01.00.00_sauvegarde/sql/mediawiki.sql
 
-- name: Copy directory
-  command: cp -r /appli/mediawiki/01.00.00_sauvegarde/wiki_devops /appli/projects/mediawiki/httpd/
+#- name: Copy directory
+#  command: cp -r /appli/mediawiki/01.00.00_sauvegarde/wiki_devops /appli/projects/mediawiki/httpd/
