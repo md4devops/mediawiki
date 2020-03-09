@@ -19,7 +19,7 @@ stages {
           colorized: true,
           playbook: 'install_lamp.yml',
           inventory: 'inventories/alex/hosts',
-          extras: '${VERBOSE}'
+          extras: '${verbose}'
         )
       }
     }
@@ -35,7 +35,7 @@ stages {
           colorized: true,
           playbook: 'install_deploy.yml',
           inventory: 'inventories/alex/hosts',
-          extras: '${VERBOSE}'
+          extras: '${verbose}'
         )
       }
     }
@@ -51,7 +51,7 @@ stages {
           colorized: true,
           playbook: 'install_migration.yml',
           inventory: 'inventories/alex/hosts',
-          extras: '${VERBOSE}'
+          extras: '${verbose}'
         )
       }
     }
